@@ -1,0 +1,107 @@
+ENDPOINT
+URL: '/api/year/'
+METHOD: POST
+BODY: {	
+"year":"Year X"
+}
+EXPECTED RESPONSE CODE: 201
+EXPECTED RESPONSE BODY: {"status":True}
+
+
+ENDPOINT
+DESCRIPTION: list all years
+URL:'/api/year/'
+METHOD: GET
+EXPECTED RESPONSE BODY: {"status":True, "years":[]}
+
+
+ENDPOINT
+DESCRIPTION: get all courses under a certain year
+URL: '/api/course/<string:year_id>/'
+METHOD: GET
+EXPECTED RESPONSE BODY
+{
+  "status": true,
+  "courses": [
+    {
+      "id": "63fa6c357bc39fe0b41d010c",
+      "course_name": "Business mathematics",
+      "course_code": "FBA 111",
+      "course_year": "63fa308f2396d702074d4496"
+    }
+  ]
+}
+
+
+ENDPOINT
+DESCRIPTION: create a course under a certain year
+URL: '/api/add_course/'
+METHOD: POST
+REQUEST_BODY_SAMPLE:
+
+{
+	"year_id":"63fa308f2396d702074d4496",
+	"course_name":"Argument and Evidence",
+	"course_code": "PHL123"
+}
+
+EXPECTED RESPONSE BODY
+{
+  "status": true
+}
+
+
+ENDPOINT
+DESCRIPTION: add a material to course
+URL: '/api/add_materials/'
+METHOD: POST
+REQUEST BODY SAMPLE:
+{
+	"course_id": "63fa37dd5e96257c06e29118",
+	"material_title": "Lagrangian solving",
+	"material_description": "Very good for lagrangian",
+	"material_link":"https://www.youtube.com/"
+}
+RESPONSE SAMPLE
+{
+  "status": true
+}
+RESPONSE CODE: 201
+
+
+
+ENDPOINT
+DESCRIPTION: get materials belonging to a course
+URL: '/api/materials/<string:course_id>/' 
+METHOD: GET
+RESPONSE SAMPLE:
+{
+  "status": true,
+  "materials": [
+    {
+      "id": "63fa7f7e987bf1c4d263b587",
+      "course_id": "63fa6d897bc39fe0b41d010d",
+      "material_title": "Joe Umo pdf",
+      "material_description": "Best text for ecn",
+      "material_link": "https://flask-restful.readthedocs.io/en/latest/reqparse.html"
+    },
+    {
+      "id": "63fa7fcb987bf1c4d263b588",
+      "course_id": "63fa6d897bc39fe0b41d010d",
+      "material_title": "Joe Umo pdf",
+      "material_description": "Best text for ecn",
+      "material_link": "https://flask-restful.readthedocs.io/en/latest/reqparse.html"
+    }
+  ]
+}
+RESPONSE CODE: 200
+
+
+ENDPOINT
+DESCRIPTION: Delete a material
+URL: '/api/del_materials/<string:course_id>/'
+METHOD: DELETE
+SAMPLE_RESPONSE:
+{
+  "status": true
+}
