@@ -126,7 +126,6 @@ def get_materials(course_id:str):
             'material_link': d.get('material_link')
         })
     
-    print(serializable_data)
     return {'status':True, 'materials':serializable_data}
 
 
