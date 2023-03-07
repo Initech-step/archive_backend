@@ -7,6 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+welcome='love'
+
 origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
@@ -114,6 +116,7 @@ def get_materials(course_id:str):
     materials_collection = db.resources
     data = materials_collection.find({'course_id':course_id})
     serializable_data = []
+
     for d in data:
         serializable_data.append({
             'id': str(d.get('_id')),
@@ -122,7 +125,10 @@ def get_materials(course_id:str):
             'material_description': d.get('material_description'),
             'material_link': d.get('material_link')
         })
-        return {'status':True, 'materials':serializable_data}
+    
+    print(serializable_data)
+    return {'status':True, 'materials':serializable_data}
+
 
 @app.post("/api/add_materials/", status_code=status.HTTP_201_CREATED)
 def add_materials(material:Material, auth:str=Header()):
